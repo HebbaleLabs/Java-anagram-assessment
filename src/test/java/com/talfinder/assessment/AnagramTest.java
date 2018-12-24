@@ -24,19 +24,19 @@ public class AnagramTest {
 
   @Test
   public void evalAnagramForSameParentChildStringLength(){
-    List<String> actual = anagram.evalAnagrams("AdnBndAndBdaBn", "adnBndAndBdaBn");
+    List<String> actual = anagram.evalAnagrams("AbrAcadAbRa", "AbrAcadAbRa");
     Assert.assertEquals(0, actual.size());
   }
 
   @Test
   public void evalAnagramForValidChildString(){
-    List<String> actual = anagram.evalAnagrams("AdnBndAndBdaBn", "dAn");
-    Assert.assertEquals(4, actual.size());
+    List<String> actual = anagram.evalAnagrams("eatSatAteMatePlate", "Ate");
+    Assert.assertEquals(3, actual.size());
   }
 
   @Test
   public void evalAnagramForInValidChildString(){
-    List<String> actual = anagram.evalAnagrams("AdnBndAndBdaBn", "abc");
+    List<String> actual = anagram.evalAnagrams("catMatChatPact", "abc");
     Assert.assertEquals(0, actual.size());
   }
 
