@@ -13,30 +13,35 @@ public class AnagramTest {
   @Test
   public void evalAnagramForEmptyChildString(){
     List<String> actual = anagram.evalAnagrams("AdnBndAndBdaBn", "");
+    Assert.assertNotNull(actual);
     Assert.assertEquals(0, actual.size());
   }
 
   @Test
   public void evalAnagramForEmptyParentString(){
     List<String> actual = anagram.evalAnagrams("", "dAn");
+    Assert.assertNotNull(actual);
     Assert.assertEquals(0, actual.size());
   }
 
   @Test
   public void evalAnagramForSameParentChildStringLength(){
     List<String> actual = anagram.evalAnagrams("AbrAcadAbRa", "AbrAcadAbRa");
+    Assert.assertNotNull(actual);
     Assert.assertEquals(0, actual.size());
   }
 
   @Test
   public void evalAnagramForValidChildString(){
     List<String> actual = anagram.evalAnagrams("eatSatAteMatePlate", "Ate");
+    Assert.assertNotNull(actual);
     Assert.assertEquals(3, actual.size());
   }
 
   @Test
   public void evalAnagramForInValidChildString(){
     List<String> actual = anagram.evalAnagrams("catMatChatPact", "abc");
+    Assert.assertNotNull(actual);
     Assert.assertEquals(0, actual.size());
   }
 
@@ -44,6 +49,7 @@ public class AnagramTest {
   public void evalAnagramToCheckListsAreEqual(){
     List<String> expected = Arrays.asList("Adn", "ndA", "dAn", "And");
     List<String> actual = anagram.evalAnagrams("AdnBndAndBdaBn", "dAn");
+    Assert.assertNotNull(actual);
     Assert.assertThat(actual, is(expected));
   }
 }
