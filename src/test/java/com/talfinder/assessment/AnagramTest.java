@@ -26,16 +26,20 @@ public class AnagramTest {
 
   @Test
   public void evalAnagramForSameParentChildStringLength(){
+    List<String> expected = Arrays.asList("AbrAcadAbRa");
     List<String> actual = anagram.evalAnagrams("AbrAcadAbRa", "AbrAcadAbRa");
     Assert.assertNotNull(actual);
-    Assert.assertEquals(0, actual.size());
+    Assert.assertEquals(1, actual.size());
+    Assert.assertThat(actual, is(expected));
   }
 
   @Test
   public void evalAnagramForValidChildString(){
+    List<String> expected = Arrays.asList("eat","Ate","ate","ate");
     List<String> actual = anagram.evalAnagrams("eatSatAteMatePlate", "Ate");
     Assert.assertNotNull(actual);
-    Assert.assertEquals(3, actual.size());
+    Assert.assertEquals(4, actual.size());
+    Assert.assertThat(actual, is(expected));
   }
 
   @Test
