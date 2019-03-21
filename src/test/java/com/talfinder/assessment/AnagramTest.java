@@ -2,58 +2,45 @@ package com.talfinder.assessment;
 
 import static org.hamcrest.CoreMatchers.is;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 import org.junit.Assert;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
+import org.junit.runners.Parameterized.Parameters;
 
+@RunWith(Parameterized.class)
 public class AnagramTest {
-  private Anagram anagram = new Anagram();
 
-  @Test
-  public void evalAnagramForEmptyChildString(){
-    List<String> actual = anagram.evalAnagrams("AdnBndAndBdaBn", "");
-    Assert.assertNotNull(actual);
-    Assert.assertEquals(0, actual.size());
+  @Parameters
+  public static Collection<Object[]> parameters() {
+    return Arrays.asList(new Object[][] {
+        {"AdnBndAndBdaBn", "", new ArrayList<>()},
+        {"", "dAn", new ArrayList<>()},
+        {"catMatChatPact", "abc", new ArrayList<>()},
+        {"AbrAcadAbRa", "AbrAcadAbRa", new ArrayList<>(Arrays.asList("AbrAcadAbRa"))},
+        {"eatSatAteMatePlate", "Ate", new ArrayList<>(Arrays.asList("eat","Ate","ate","ate"))},
+        {"AdnBndAndBdaBn", "dAn", new ArrayList<>(Arrays.asList("Adn", "ndA", "dAn", "And"))},
+        {"BACDGABCDA", "ABCD", new ArrayList<>(Arrays.asList("BACD", "ABCD", "BCDA"))},
+        {"AAABABAA", "AABA", new ArrayList<>(Arrays.asList("AAAB", "AABA", "ABAA"))}
+    });
+  }
+
+  String parent;
+  String child;
+  List<String> expectedValue;
+
+  public AnagramTest(String parent, String child, List<String> expectedValue) {
+    this.parent = parent;
+    this.child = child;
+    this.expectedValue = expectedValue;
   }
 
   @Test
-  public void evalAnagramForEmptyParentString(){
-    List<String> actual = anagram.evalAnagrams("", "dAn");
-    Assert.assertNotNull(actual);
-    Assert.assertEquals(0, actual.size());
-  }
-
-  @Test
-  public void evalAnagramForSameParentChildStringLength(){
-    List<String> expected = Arrays.asList("AbrAcadAbRa");
-    List<String> actual = anagram.evalAnagrams("AbrAcadAbRa", "AbrAcadAbRa");
-    Assert.assertNotNull(actual);
-    Assert.assertEquals(1, actual.size());
-    Assert.assertThat(actual, is(expected));
-  }
-
-  @Test
-  public void evalAnagramForValidChildString(){
-    List<String> expected = Arrays.asList("eat","Ate","ate","ate");
-    List<String> actual = anagram.evalAnagrams("eatSatAteMatePlate", "Ate");
-    Assert.assertNotNull(actual);
-    Assert.assertEquals(4, actual.size());
-    Assert.assertThat(actual, is(expected));
-  }
-
-  @Test
-  public void evalAnagramForInValidChildString(){
-    List<String> actual = anagram.evalAnagrams("catMatChatPact", "abc");
-    Assert.assertNotNull(actual);
-    Assert.assertEquals(0, actual.size());
-  }
-
-  @Test
-  public void evalAnagramToCheckListsAreEqual(){
-    List<String> expected = Arrays.asList("Adn", "ndA", "dAn", "And");
-    List<String> actual = anagram.evalAnagrams("AdnBndAndBdaBn", "dAn");
-    Assert.assertNotNull(actual);
-    Assert.assertThat(actual, is(expected));
+  public void evalAnagrams(){
+    Assert.assertEquals("input:Parent as '" + parent + "' Child as '" + child + "'", expectedValue, Anagram.evalAnagrams(parent, child));
   }
 }
